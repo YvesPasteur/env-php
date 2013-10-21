@@ -15,7 +15,7 @@ if type -P apachectl &>/dev/null; then
   echo "Apache est déjà installé";
 else
   echo "Installe Apache"
-  
+
   # mailcap : necessaire pour httpd
   # lynx : necessaire pour apachtectl status
   yum install -y mailcap lynx

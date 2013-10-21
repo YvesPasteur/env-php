@@ -19,7 +19,7 @@ function error_handler() {
 #  echo "MariaDB.repo already exists"
 #else
 #  cp /vagrant/cookbooks/mariadb/MariaDB.repo /etc/yum.repos.d/
-#  error_handler $? "Config MariaDB repo"  
+#  error_handler $? "Config MariaDB repo"
 #  echo "MariaDB.repo copied"
 #fi
 
@@ -35,7 +35,7 @@ if type -P mysql &>/dev/null; then
   echo "MariaDB est déjà installé"
 else
   echo "Installe MariaDB"
-  
+
   yum install -y  perl-DBI
   error_handler $? "Probleme lors de l'installation du package perl-DBI"
 

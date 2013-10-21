@@ -17,7 +17,6 @@ $app->get('/', function () use ($dbh) {
         <input type="text" value="" name="message"/>
         <input type="submit"/>
     </form>';
-    
 
     $res = $dbh->query('SELECT * FROM message');
     $output .= '<ul>';
@@ -32,7 +31,7 @@ $app->post('/', function (Request $request) use ($dbh, $app) {
     $message = $request->get('message');
 
     $stmt = $dbh->prepare('INSERT INTO message VALUES (:msg)');
-    $stmt->bindParam(':msg', $message, PDO::PARAM_STR, 126);
+    $stmt->bindParam(':msg', $message, PDO::PARAM_STR, 120);
     if (! $stmt->execute()) {
         return "Erreur à l'insertion !";
     }
