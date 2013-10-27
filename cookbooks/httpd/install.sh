@@ -33,6 +33,13 @@ else
   # firewall
   iptables -I INPUT -p tcp --dport 80 -j ACCEPT
   service iptables save
+
+  # désactivation de SeLinux pour que le DocumentRoot puisse être un répertoire partagé
+  # desactivation temporaire - effective sans reboot
+  setenforce 0
+  # desactivation permanente - prise en compte apres reboot
+  sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
+
 fi
 
 /usr/sbin/apachectl start
