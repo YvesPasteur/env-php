@@ -28,6 +28,7 @@ else
 
   # ajout de la configuration de xdebug
 
+  # debugging
   echo "[xdebug]
   xdebug.remote_enable=on
   ; tous les clients pouvant acceder a la VM peuvent declencher le mode debug
@@ -35,6 +36,11 @@ else
   ; cle specifique a l'ide
   xdebug.idekey="toto-xdebug"
   xdebug.remote_log=/tmp/xdebug.log" >> /usr/local/lib/php.ini
+
+  # profiling
+  echo "
+  xdebug.profiler_enable=0
+  xdebug.profiler_enable_trigger=1" >> /usr/local/lib/php.ini
 
   apachectl restart
 fi
