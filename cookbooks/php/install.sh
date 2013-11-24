@@ -18,9 +18,12 @@ if type -P php &>/dev/null; then
 else
   echo "Installe PHP"
 
-  yum install -y -q libxml2-devel curl-devel libpng-devel libpng
+  yum install -y -q libxml2-devel curl-devel libpng-devel libpng mcrypt.x86_64 libmcrypt-devel.x86_64
   error_handler $? "Probleme lors de l'installation des packages de dependance"
   echo "Installation packages de dependance OK"
+
+  cp /vagrant/cookbooks/php/libmcrypt.so.4 /usr/lib64/
+  error_handler $? "Probleme lors de la copie du module libmcrypt"
 
   yum install -y -q /vagrant/cookbooks/php/php-1_x86_64.rpm
   error_handler $? "Probleme lors de l'installation du RPM de PHP"
