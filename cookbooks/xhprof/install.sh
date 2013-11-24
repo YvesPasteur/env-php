@@ -35,6 +35,29 @@ else
 
   chmod -R 0777 /var/www/xhgui/cache
 
+  # composer
+  cd /var/www/xhgui
+
+  if [ -f "composer.phar" ]; then
+    echo "Composer déjà installé"
+  else
+    echo "Récupère composer"
+    curl -sS https://getcomposer.org/installer | /usr/local/bin/php
+    error_handler $? "Erreur lors de la récupération de composer"
+  fi
+
+  PATH=$PATH:/usr/local/bin
+
+  ./composer.phar install --no-dev
+
+  # conf apache
+  cp /vagrant/cookbooks/xhprof/xhgui.conf /etc/httpd/sites-available/
+  ln -s /etc/httpd/sites-available/xhgui.conf /etc/httpd/sites-enabled/
+
+  # firewall
+  iptables -I INPUT -p tcp --dport 81 -j ACCEPT
+  service iptables save
+
   apachectl restart
 fi
 

@@ -43,9 +43,10 @@ if (!extension_loaded('mongo')) {
 }
 
 // Obtain the answer to life, the universe, and your application one time out of a hundred
-if (rand(0, 100) !== 42) {
+// we want always profiling
+/*if (rand(0, 100) !== 42) {
     return;
-}
+}*/
 
 if (!isset($_SERVER['REQUEST_TIME_FLOAT'])) {
     $_SERVER['REQUEST_TIME_FLOAT'] = microtime(true);

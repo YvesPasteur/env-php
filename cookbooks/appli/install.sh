@@ -40,6 +40,15 @@ cp /vagrant/cookbooks/appli/.htaccess /var/www/html/
 echo "Suppression de index.html"
 rm /var/www/html/index.html
 
+# conf apache
+cp /vagrant/cookbooks/appli/main.conf /etc/httpd/sites-available/
+ln -s /etc/httpd/sites-available/main.conf /etc/httpd/sites-enabled/
+
+# firewall
+iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+service iptables save
+
+
 apachectl restart
 
 d=`date`
