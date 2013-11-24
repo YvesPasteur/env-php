@@ -35,9 +35,12 @@ else
   echo "[mongo]
   extension = mongo.so" >> /usr/local/lib/php.ini
 
-  apachectl restart
+  mkdir -p /var/log/mongod/
+  mkdir -p /data/db
 fi
 
+apachectl restart
+mongod --smallfiles --logpath /var/log/mongod/mongod.log &
 
 d=`date`
 echo "$d - Fin Installation de MongoDB"
